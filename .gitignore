@@ -3,5 +3,4 @@
 
 # other
 *.iml
-out/
-gen/
+logs/*
