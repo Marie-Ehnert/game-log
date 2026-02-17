@@ -7,13 +7,26 @@ PATH = Path(__file__).parent.parent.joinpath("logs")
 
 def start_log():
     print("Welcome to game-log! \n")
-    print("Type \"new\" to create a new log or type \"update\" to append to an existing log")
+    print("Type:"
+          "\n> [new] to create a new log"
+          "\n> [update] to append to an existing log"
+          "\n> [list all] to list all existing logs"
+          "\n> [read] to print the log content to the console"
+          "\n> [delete] to delete a game log"
+          "\n")
     command = input()
     if command == "new":
         create_game_log()
     elif command == "update":
         update_game_log()
-
+    elif command == "list all":
+        list_all()
+    elif command == "read":
+        print("Enter name of log file:\n")
+        log_name = input()
+        read_log(log_name)
+    elif command == "delete":
+        print("delete")
 
 def create_game_log():
     print("Enter new game name: ")
@@ -53,4 +66,16 @@ def update_game_log():
     else: print(f"No game file found with the name {game_log_path}, did you mean to create one? If yes please restart this program and use the \"new\" command")
 
 
+def list_all():
+    dir_list = os.listdir(PATH)
+    for item in dir_list:
+        print("* " + item + "\n")
+
+def read_log(log_name: str):
+    game_log_path = f"{PATH}/{log_name}"
+    file = open(game_log_path, "r")
+    content = file.read()
+    # here no line seperator at the end because each log leaves a newline anyway
+    print("\n" + "-->\n" + content + "<--")
+    file.close()
 
