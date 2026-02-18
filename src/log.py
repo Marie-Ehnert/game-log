@@ -6,6 +6,7 @@ from pathlib import Path
 PATH = Path(__file__).parent.parent.joinpath("logs")
 
 def start_log():
+    print("change")
     if not PATH.is_dir():
         PATH.mkdir(parents=True, exist_ok=True)
     print("Welcome to game-log! \n")

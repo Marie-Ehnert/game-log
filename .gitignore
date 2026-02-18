@@ -2,7 +2,8 @@
 .idea/
 
 #python
-src/__pycache__
+**/__pycache__/
+*.py[cod]
 
 # other
 *.iml
