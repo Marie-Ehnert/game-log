@@ -2,7 +2,7 @@
 .idea/
 
 #python
-__pycache__
+__pycache__/
 
 # other
 *.iml
