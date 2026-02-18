@@ -1,6 +1,9 @@
 # JetBrains/IntelliJ IDE files
 .idea/
 
+#python
+__pycache__
+
 # other
 *.iml
 logs/*
