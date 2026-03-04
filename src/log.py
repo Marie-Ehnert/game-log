@@ -56,7 +56,7 @@ def update_game_log():
     game = input()
     dir_list = os.listdir(LOG_PATH)
     game_found = False
-    game_log_file_name = f"{game.replace(" ", "_")}_log.txt"
+    game_log_file_name = f"{game.replace(' ', '_')}_log.txt"
     game_log_path = f"{LOG_PATH}/{game_log_file_name}"
     for file in dir_list:
         if game_log_file_name == file:
