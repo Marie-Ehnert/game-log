@@ -1,15 +1,12 @@
 import os
-from datetime import date
-from io import TextIOWrapper
-from pathlib import Path
+from src.constants import LOG_PATH, USE_STEAM_STATS
+from src.utils import query_player_input, get_total_hours_played, is_dir_or_else_create
 
-PATH = Path(__file__).parent.parent.joinpath("logs")
 
 def start_log():
-    print("change")
-    if not PATH.is_dir():
-        PATH.mkdir(parents=True, exist_ok=True)
+    is_dir_or_else_create(LOG_PATH)
     print("Welcome to game-log! \n")
+    print("To activate steam playtime data tracking, fill out the config.toml and make sure to turn \"use_steam_stats\" to True")
     show_commands()
     command = input()
     match command:
@@ -42,51 +39,45 @@ def show_commands():
 def create_game_log():
     print("Enter new game name: ")
     new_game = input()
+    playtime = None
+    if USE_STEAM_STATS:
+        playtime = get_total_hours_played(new_game, playtime)
+
     try:
-        game_file = f"{new_game.replace(" ", "_")}_log.txt"
-        game_file_path = open(f"{PATH}/{game_file}", "x")
-        query_player_input(game_file_path)
-        print(f"\n 📝 {game_file} has been created!")
+        game_file = f"{new_game.replace(' ', '_')}_log.txt"
+        game_file_path = open(f"{LOG_PATH}/{game_file}", "x")
+        query_player_input(game_file_path, playtime)
+        print(f"\n 📝  {game_file} has been created!")
     except FileExistsError:
         print("This game is already logged, you can only update it!")
-
-
-def query_player_input(game_file: TextIOWrapper):
-    game_file.write(f"LOG {date.today()}:\n")
-    print("What have you done this session?: ")
-    history = input()
-    game_file.write(history + os.linesep)
-    print("What are the next steps and goals?: ")
-    future = input()
-    game_file.write(future + os.linesep)
-    game_file.write("\n")
-
 
 def update_game_log():
     print("What game shall be logged?: ")
     game = input()
-    dir_list = os.listdir(PATH)
+    dir_list = os.listdir(LOG_PATH)
     game_found = False
     game_log_file_name = f"{game.replace(" ", "_")}_log.txt"
-    game_log_path = f"{PATH}/{game_log_file_name}"
+    game_log_path = f"{LOG_PATH}/{game_log_file_name}"
     for file in dir_list:
         if game_log_file_name == file:
             game_found = True
             continue
     if game_found:
+        playtime = None
+        if USE_STEAM_STATS:
+            playtime = get_total_hours_played(game, playtime)
         with open(game_log_path, "a") as game_file:
-            query_player_input(game_file)
-        print(f"\n ✅ {game_log_file_name} has been updated!")
+            query_player_input(game_file, playtime)
+        print(f"\n ✅  {game_log_file_name} has been updated!")
     else: print(f"No game file found with the name {game_log_path}, did you mean to create one? If yes please restart this program and use the \"new\" command")
 
-
 def list_all():
-    dir_list = os.listdir(PATH)
+    dir_list = os.listdir(LOG_PATH)
     for item in dir_list:
         print("> " + item)
 
 def read_log(log_name: str):
-    game_log_path = f"{PATH}/{log_name}"
+    game_log_path = f"{LOG_PATH}/{log_name}"
     file = open(game_log_path, "r")
     content = file.read()
     # here no line seperator at the end because each log leaves a newline anyway
@@ -94,10 +85,10 @@ def read_log(log_name: str):
     file.close()
 
 def delete_log(log_name: str):
-    game_log_path = f"{PATH}/{log_name}"
+    game_log_path = f"{LOG_PATH}/{log_name}"
     if os.path.exists(game_log_path):
         os.remove(game_log_path)
-        print(f"🗑️ {log_name} removed")
+        print(f"🗑️  {log_name} removed")
     else:
         print("No File found!")
 

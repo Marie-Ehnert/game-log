@@ -11,3 +11,4 @@ config.toml
 # other
 *.iml
 logs/*
+steam_game_data/*
