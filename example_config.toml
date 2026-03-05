@@ -1,0 +1,4 @@
+#Steam API
+steam_api_key = "" # enter your API key here and make sure to keep it private
+steam_id_64 = "" # can be found online, this id identifies you as a steam user
+use_steam_stats = "False" # turn to True to enable the usage of steam user data
