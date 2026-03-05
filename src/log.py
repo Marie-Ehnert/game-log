@@ -41,7 +41,7 @@ def create_game_log():
     new_game = input()
     playtime = None
     if USE_STEAM_STATS:
-        playtime = get_total_hours_played(new_game, playtime)
+        playtime = get_total_hours_played(new_game)
 
     try:
         game_file = f"{new_game.replace(' ', '_')}_log.txt"
@@ -65,7 +65,7 @@ def update_game_log():
     if game_found:
         playtime = None
         if USE_STEAM_STATS:
-            playtime = get_total_hours_played(game, playtime)
+            playtime = get_total_hours_played(game)
         with open(game_log_path, "a") as game_file:
             query_player_input(game_file, playtime)
         print(f"\n ✅  {game_log_file_name} has been updated!")

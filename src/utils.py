@@ -37,7 +37,7 @@ def query_player_input(game_file: TextIOWrapper, playtime: None | float):
         game_file.write("Total hours played: " + str(floor(playtime)) + os.linesep)
     game_file.write("\n")
 
-def get_total_hours_played(new_game: str, playtime: float | None) -> float | None:
+def get_total_hours_played(new_game: str) -> float | None:
     get_steam_data()
     games_data: List[Dict] = []
     with open(GAMES_DATA_JSON_PATH, "r") as json_file:
