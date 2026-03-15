@@ -27,7 +27,7 @@ def get_owned_games(api_key: str, steam_id: str) -> List[Dict] | str:
             for game in games_owned
         ]
         return concise_game_infos
-    except requests.exceptions.RequestException and SteamGamesError as e:
+    except requests.exceptions.HTTPError and SteamGamesError as e:
         raise RuntimeError(e)
 
 class SteamGamesError(Exception):

@@ -2,7 +2,6 @@ import os
 from src.constants import LOG_PATH, USE_STEAM_STATS
 from src.utils import query_player_input, get_total_hours_played, is_dir_or_else_create
 
-
 def start_log():
     is_dir_or_else_create(LOG_PATH)
     print("Welcome to game-log! \n")
