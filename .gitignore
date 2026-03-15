@@ -5,6 +5,10 @@
 **/__pycache__/
 *.py[cod]
 
+#config
+config.toml
+
 # other
 *.iml
 logs/*
+steam_game_data/*
