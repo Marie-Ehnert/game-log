@@ -5,7 +5,7 @@ from datetime import date
 from src import log as log_mod
 from src.constants import LOG_PATH
 
-from src.log import show_commands, create_game_log
+from src.log import show_commands
 from contextlib import redirect_stdout
 
 class TestLogFunctions(unittest.TestCase):
