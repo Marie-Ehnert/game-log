@@ -1,7 +1,7 @@
 import unittest
 from requests.exceptions import HTTPError
 
-from src.api_requests import get_owned_games
+from game_log.api_requests import get_owned_games
 
 
 class TestApiRequests(unittest.TestCase):

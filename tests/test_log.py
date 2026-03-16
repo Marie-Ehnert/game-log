@@ -2,10 +2,10 @@ import io
 import unittest
 from unittest.mock import patch
 from datetime import date
-from src import log as log_mod
-from src.constants import LOG_PATH
+from game_log import log as log_mod
+from game_log.constants import LOG_PATH
 
-from src.log import show_commands
+from game_log.log import show_commands
 from contextlib import redirect_stdout
 
 class TestLogFunctions(unittest.TestCase):
