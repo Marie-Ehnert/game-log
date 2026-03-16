@@ -1,7 +1,7 @@
 import os
 import click
-from src.constants import LOG_PATH, USE_STEAM_STATS
-from src.utils import query_player_input, get_total_hours_played, is_dir_or_else_create
+from game_log.constants import LOG_PATH, USE_STEAM_STATS
+from game_log.utils import query_player_input, get_total_hours_played, is_dir_or_else_create
 
 @click.command()
 def start_log():

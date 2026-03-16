@@ -6,8 +6,8 @@ from math import floor
 from pathlib import Path
 from typing import List, Dict
 
-import src.api_requests as req
-from src.constants import STEAM_GAME_DATA_PATH, API_KEY, STEAM_ID, GAMES_DATA_JSON_PATH
+import game_log.api_requests as req
+from game_log.constants import STEAM_GAME_DATA_PATH, API_KEY, STEAM_ID, GAMES_DATA_JSON_PATH
 
 
 def is_dir_or_else_create(path: Path):
