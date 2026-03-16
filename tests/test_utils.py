@@ -1,9 +1,9 @@
 import json
 import os
 from pathlib import Path
-from src.constants import GAMES_DATA_JSON_PATH
-from src.utils import is_dir_or_else_create, get_steam_data, query_player_input, get_total_hours_played
-from src.constants import STEAM_GAME_DATA_PATH
+from game_log.constants import GAMES_DATA_JSON_PATH
+from game_log.utils import is_dir_or_else_create, get_steam_data, query_player_input, get_total_hours_played
+from game_log.constants import STEAM_GAME_DATA_PATH
 import unittest
 from unittest.mock import patch
 
@@ -17,7 +17,7 @@ class TestUtilsFunctions(unittest.TestCase):
         self.assertTrue(EXAMPLE_DIR_PATH.is_dir())
         EXAMPLE_DIR_PATH.rmdir()
 
-    @patch("src.utils.req")
+    @patch("game_log.utils.req")
     def test_get_steam_data_succeeds(self, mock_req):
         mock_steam_api_response = [
             {
@@ -84,7 +84,7 @@ class TestUtilsFunctions(unittest.TestCase):
         with open(GAMES_DATA_JSON_PATH, "w", encoding="utf-8") as f:
             json.dump(sample, f)
         # Patch get_steam_data to avoid overwriting file
-        with patch('src.utils.get_steam_data'):
+        with patch('game_log.utils.get_steam_data'):
             hours = get_total_hours_played('Game X')
         self.assertAlmostEqual(hours, 2.0)
         # Cleanup
@@ -98,7 +98,7 @@ class TestUtilsFunctions(unittest.TestCase):
         STEAM_GAME_DATA_PATH.mkdir(parents=True, exist_ok=True)
         with open(GAMES_DATA_JSON_PATH, "w", encoding="utf-8") as f:
             json.dump(sample, f)
-        with patch('src.utils.get_steam_data'):
+        with patch('game_log.utils.get_steam_data'):
             result = get_total_hours_played('Missing')
         self.assertIsNone(result)
         if GAMES_DATA_JSON_PATH.exists():
