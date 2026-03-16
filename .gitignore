@@ -11,4 +11,5 @@ config.toml
 # other
 *.iml
 logs/*
+game_log.egg-info/*
 steam_game_data/*

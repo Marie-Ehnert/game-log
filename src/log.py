@@ -1,7 +1,9 @@
 import os
+import click
 from src.constants import LOG_PATH, USE_STEAM_STATS
 from src.utils import query_player_input, get_total_hours_played, is_dir_or_else_create
 
+@click.command()
 def start_log():
     is_dir_or_else_create(LOG_PATH)
     print("Welcome to game-log! \n")
@@ -91,3 +93,5 @@ def delete_log(log_name: str):
     else:
         print("No File found!")
 
+if __name__ == "__main__":
+    start_log()

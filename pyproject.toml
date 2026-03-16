@@ -1,0 +1,13 @@
+[project]
+name = "game-log"
+version = "0.1.0"
+dependencies = [
+    "click",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[project.scripts]
+game-log = "src.log:start_log"
